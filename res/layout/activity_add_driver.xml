@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtEditName"
+            android:layout_margin="4dp"
+            android:hint="نام" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtEditFamily"
+            android:layout_margin="4dp"
+            android:hint="نام خانوادگی" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtEditPhone"
+            android:layout_margin="4dp"
+            android:hint="شماره تماس" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtEditAddress"
+            android:layout_margin="4dp"
+            android:hint="آدرس" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtEditNationalCode"
+            android:layout_margin="4dp"
+            android:hint="کد ملی" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spnCarType"
+            android:layout_gravity="center_horizontal"
+            android:gravity="right"
+            android:spinnerMode="dialog" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="لغو عملیات"
+            android:id="@+id/btnCancelDriver"
+            android:padding="20dp"
+            android:layout_weight="0.5"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="ثبت راننده"
+            android:id="@+id/btnAddDriver"
+            android:padding="20dp"
+            android:layout_weight="0.5"
+            android:layout_margin="2dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
