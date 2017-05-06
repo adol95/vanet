@@ -466,5 +466,24 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements DatabaseOper
         return null;
     }
 
+    public int getLastRowId(String idColumnName , String tableName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT MAX("
+                + idColumnName
+                + ") FROM "
+                + tableName;
+
+        int lastRowId = 0;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            lastRowId = cursor.getInt(0);
+            cursor.close();
+        }
+        db.close();
+        return lastRowId;
+    }
+
 
 }
