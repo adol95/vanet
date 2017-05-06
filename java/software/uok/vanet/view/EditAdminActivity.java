@@ -1,5 +1,6 @@
 package software.uok.vanet.view;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,42 +10,58 @@ import android.widget.Toast;
 
 import software.uok.vanet.R;
 import software.uok.vanet.VanetApplication;
-import software.uok.vanet.model.Customer;
+import software.uok.vanet.model.Admin;
+import software.uok.vanet.model.Clerk;
 
 /**
  * Created by micropardaz on 5/4/2017.
  */
-public class EditCustomerActivity extends VanetActivity{
+public class EditAdminActivity extends Activity{
+
     private Button btnEdit;
     private Button btnCancel;
+
     private TextView txtCode;
+
     private EditText txtEditName;
     private EditText txtEditFamily;
+    private EditText txtEditUser;
+    private EditText txtEditPass;
+    private EditText txtEditNationalCode;
     private EditText txtEditPhone;
     private EditText txtEditAddress;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        VanetApplication.currentActivity=this;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_customer);
+        setContentView(R.layout.activity_edit_admin);
 
         Bundle extras = this.getIntent().getExtras();
-        final Customer current = (Customer) extras.get("CURRENT_CUSTOMER");
+        final Admin current = (Admin) extras.get("CURRENT_ADMIN");
 
         btnEdit = (Button) findViewById(R.id.btnAddAdmin);
         btnCancel = (Button) findViewById(R.id.btnCancel);
-        txtCode = (TextView) findViewById(R.id.txtCode);
         txtEditName = (EditText) findViewById(R.id.txtEditName);
         txtEditFamily = (EditText) findViewById(R.id.txtEditFamily);
+        txtEditUser = (EditText) findViewById(R.id.txtEditUser);
+        txtEditPass = (EditText) findViewById(R.id.txtEditPass);
+        txtEditNationalCode = (EditText) findViewById(R.id.txtEditNationalCode);
         txtEditPhone = (EditText) findViewById(R.id.txtEditPhone);
         txtEditAddress = (EditText) findViewById(R.id.txtEditAddress);
 
-        txtCode.setText(current.getId());
         txtEditName.setText(current.getName());
         txtEditFamily.setText(current.getFamily());
-        txtEditPhone.setText(current.getId());
-        txtEditAddress.setText(current.getId());
+        txtEditUser.setText(current.getUsername());
+        txtEditPass.setText(current.getPassword());
+        txtEditNationalCode.setText(current.getNationalCode()+"");
+        txtEditPhone.setText(current.getPhone());
+        txtEditAddress.setText(current.getAddress());
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,22 +69,28 @@ public class EditCustomerActivity extends VanetActivity{
 
                 String _name = txtEditName.getText().toString();
                 String _family = txtEditFamily.getText().toString();
+                String _user = txtEditUser.getText().toString();
+                String _pass = txtEditPass.getText().toString();
+                String _nationalCode = txtEditNationalCode.getText().toString();
                 String _phone = txtEditPhone.getText().toString();
                 String _address = txtEditAddress.getText().toString();
 
                 if (_name.isEmpty() || _family.isEmpty() ||
-                        _phone.isEmpty() || _address.isEmpty()) {
+                        _user.isEmpty() || _pass.isEmpty() ||
+                        _nationalCode.isEmpty() || _phone.isEmpty() || _address.isEmpty()) {
                     Toast.makeText(VanetApplication.context, "اطلاعات کامل وارد نشده است", Toast.LENGTH_SHORT);
                 } else {
-                    Customer updated = new Customer();
-                    Toast.makeText(VanetApplication.context, _family, Toast.LENGTH_SHORT).show();
+                    Admin updated = new Admin();
 
                     updated.setName(_name);
                     updated.setFamily(_family);
+                    updated.setUsername(_user);
+                    updated.setPassword(_pass);
+                    updated.setNationalCode(Long.parseLong(_nationalCode));
                     updated.setPhone(_phone);
                     updated.setAddress(_address);
 
-                    VanetApplication.databaseOpenHelper.updateCustomer(current,updated);
+                    VanetApplication.databaseOpenHelper.updateAdmin(current,updated);
 
                 }
 
